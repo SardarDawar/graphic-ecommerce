@@ -1,28 +1,18 @@
 from django.contrib import admin
-from .models import Order, OrderLineItem
+from .models import Order, OrderItem
 
 
-class OrderLineItemAdminInline(admin.TabularInline):
-    model = OrderLineItem
-    readonly_fields = ('lineitem_total',)
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    raw_id_fields = ['product']
 
 
 class OrderAdmin(admin.ModelAdmin):
-    inlines = (OrderLineItemAdminInline,)
-
-    readonly_fields = ('order_number', 'date',
-                        'order_total',
-                       'grand_total', )
-
-    fields = ('order_number', 'date', 'full_name', 'email', 'phone_number',
-               'country',
-              'order_total', 'grand_total',)
-
-    list_display = ('order_number', 'date', 'full_name',
-                    'order_total',
-                    'grand_total',)
-
-    ordering = ('-date',)
+    list_display = ['id', 'first_name', 'last_name', 'email', 'address', 'contact_number', 'city', 'paid', 'created',
+                    'updated']
+    list_filter = ['paid', 'created', 'updated']
+    inlines = [OrderItemInline]
 
 
 admin.site.register(Order, OrderAdmin)
+

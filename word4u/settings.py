@@ -75,7 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bag.contexts.bag_contents',
+                'bag.context_processors.cart',
             ],
         },
     },
@@ -158,3 +158,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 BUNDLE_DISCOUNT_THRESHOLD = 29.99
+
+##### Cart Session ######
+CART_SESSION_ID = 'cart'
